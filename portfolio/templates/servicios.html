@@ -1,0 +1,19 @@
+{% extends "portfolio_base.html" %}
+
+{% block title %}
+Portfolio - Mis servicios
+{% endblock %}
+
+{% block content %}
+<h1>Servicios ofrecidos</h1>
+
+<p>
+    <ul>
+        {% for item in servicios %}
+            <li><b>{{ item.nombre }}:</b> {{ item.descripcion }}</li>
+        {% empty %}
+            <li>No hay servicios que ofrecer.</li>
+        {% endfor %}
+    </ul>
+</p>
+{% endblock %}
