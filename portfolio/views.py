@@ -21,3 +21,6 @@ def portfolio_mis_servicios(request):
         ]
     }
     return render(request, "servicios.html", context)
+
+def portfolio_contacto(request):
+    return render(request, "contacto.html")

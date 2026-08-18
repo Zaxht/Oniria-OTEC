@@ -1,0 +1,26 @@
+{% extends 'portfolio_base.html' %}
+
+{% block title %} Contacto - Portfolio {% endblock %}
+
+{% block content %}
+<h1>Contactenos</h1>
+<div class="container">
+    <form>
+        <div class="mb-3">
+            <lable for="nombre" class="form-label">Nombre</lable>
+            <input type="text" id="nombre" name="nombre" class="form-control">
+        </div>
+        <div class="mb-3">
+            <lable for="email" class="form-label">Email</lable>
+            <input type="email" id="email" name="email" class="form-control">
+        </div>
+        <div class="mb-3">
+            <lable for="asunto" class="form-label">Asunto</lable>
+            <textarea id="asunto" name="asunto" class="form-control" rows="4"></textarea>
+        </div>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
