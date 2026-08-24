@@ -16,4 +16,15 @@ Portfolio - Mis servicios
         {% endfor %}
     </ul>
 </p>
+
+<h1>Mis proyectos</h1>
+<p>
+    <ul>
+        {% for item in proyectos %}
+            <li><b>{{ item.titulo }}:</b> {{ item.descripcion }} <b>Técnologia: {{ item.tecnologia }}</b></li>
+        {% empty %}
+            <li>No hay servicios que ofrecer.</li>
+        {% endfor %}
+    </ul>
+</p>
 {% endblock %}

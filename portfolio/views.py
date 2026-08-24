@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from portfolio.models import proyectos
 
 # Create your views here.
 def portfolio_home(request):
@@ -18,7 +19,8 @@ def portfolio_mis_servicios(request):
                 'nombre': 'Arquitectura', 
                 'descripcion': 'Se diseñan arquitecturas solidas para software.' 
             },
-        ]
+        ],
+        'proyectos': proyectos()
     }
     return render(request, "servicios.html", context)
 
