@@ -1,0 +1,6 @@
+<section class="course-carousel" aria-label="{{ carousel_label }}" aria-roledescription="carrusel" data-carousel>
+  <div class="carousel-toolbar"><p class="carousel-hint">Desliza y descubre <span aria-hidden="true">⟷</span></p><div class="carousel-controls" hidden><span class="carousel-position" aria-live="polite" aria-atomic="true"></span><button type="button" data-direction="-1" aria-label="Cursos anteriores" aria-controls="{{ carousel_id }}">←</button><button type="button" data-direction="1" aria-label="Cursos siguientes" aria-controls="{{ carousel_id }}">→</button></div></div>
+  <div id="{{ carousel_id }}" class="carousel-track" tabindex="0" role="group" aria-label="{{ carousel_label }}. Usa las flechas izquierda y derecha para recorrer los cursos.">
+    {% for curso in cursos %}{% include 'includes/curso_card.html' with illustrated=True %}{% endfor %}
+  </div>
+</section>

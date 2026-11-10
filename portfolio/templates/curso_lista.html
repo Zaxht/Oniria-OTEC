@@ -1,0 +1,13 @@
+{% extends 'portfolio_base.html' %}
+{% load static %}
+{% block title %}Explorar cursos · Oniria{% endblock %}
+{% block body_class %}catalogue-page{% endblock %}
+{% block content %}
+<section class="catalogue-cover"><div class="catalogue-cover-copy"><p class="eyebrow"><span class="dot"></span> EL ARCHIVO ONÍRICO</p><h1>El sueño es tuyo.<br><em>El camino, también.</em></h1><p>De la primera pregunta a tu propia bitácora.<br>Explora la ciencia, la práctica y las historias del sueño lúcido.</p><a class="text-link" href="#catalogo">Encuentra tu próxima exploración ↓</a></div><img class="catalogue-cover-art" src="{% static 'images/oniria-sanctuary-v1.png' %}" alt="" width="1536" height="1024"></section>
+<section id="catalogo" class="catalogue-content" aria-label="Catálogo de cursos">
+<form method="get" action="{% url 'curso_lista' %}#catalogo" class="filters"><div><label for="q">¿Qué quieres aprender?</label><input id="q" type="search" name="q" value="{{ q }}" placeholder="Busca por nombre o descripción"></div><div><label for="area">Área de capacitación</label><select id="area" name="area"><option value="">Todas las áreas</option>{% for area in areas %}<option value="{{ area.pk }}" {% if area_actual == area.pk|stringformat:'s' %}selected{% endif %}>{{ area.nombre }}</option>{% endfor %}</select></div><button type="submit" class="button">Buscar →</button><a href="{% url 'curso_lista' %}">Limpiar</a></form>
+<div class="result-heading"><p>{{ page_obj.paginator.count }} curso{{ page_obj.paginator.count|pluralize }} encontrado{{ page_obj.paginator.count|pluralize }}</p>{% if perms.portfolio.add_curso %}<a class="text-link" href="{% url 'curso_crear' %}">+ Publicar curso</a>{% endif %}</div>
+{% if page_obj %}{% include 'includes/course_carousel.html' with cursos=page_obj carousel_id='catalogue-track' carousel_label='Cursos del catálogo' %}{% else %}<div class="empty"><h2>No encontramos cursos</h2><p>Prueba otra palabra o elimina el filtro de área.</p><a href="{% url 'curso_lista' %}">Ver todos los cursos →</a></div>{% endif %}
+{% if page_obj.has_other_pages %}<nav class="pagination" aria-label="Páginas de cursos">{% if page_obj.has_previous %}<a href="?{{ querystring }}{% if querystring %}&amp;{% endif %}page={{ page_obj.previous_page_number }}#catalogo">← Anterior</a>{% endif %}<span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>{% if page_obj.has_next %}<a href="?{{ querystring }}{% if querystring %}&amp;{% endif %}page={{ page_obj.next_page_number }}#catalogo">Siguiente →</a>{% endif %}</nav>{% endif %}
+</section>
+{% endblock %}

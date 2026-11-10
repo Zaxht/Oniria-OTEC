@@ -1,0 +1,29 @@
+{% extends 'portfolio_base.html' %}
+{% load static course_design %}
+{% block title %}Mi espacio · Oniria{% endblock %}
+{% block body_class %}account-page{% endblock %}
+{% block extra_style %}<link rel="stylesheet" href="{% static 'css/account.css' %}?v=1">{% endblock %}
+{% block content %}
+<section class="personal-welcome" aria-labelledby="personal-title">
+  <div class="personal-art" aria-hidden="true"><img src="{% static 'images/oniria-sanctuary-v1.png' %}" alt="" width="1536" height="1024"></div>
+  <div class="personal-copy"><p class="personal-kicker"><span></span> MI ESPACIO / ONIRIA</p><h1 id="personal-title">Hola, {{ nombre_personal|capfirst }}.<br><em>Vuelve a tu mundo.</em></h1><p>Un lugar para lo que aprendes,<br>lo que creas y lo que está por venir.</p><a class="personal-cta" href="{% url 'curso_lista' %}">Explorar nuevos cursos <span aria-hidden="true">↗</span></a></div>
+  <span class="personal-caption" aria-hidden="true">TU PRÓXIMO VIAJE EMPIEZA AQUÍ</span>
+</section>
+<nav class="personal-stats" aria-label="Resumen de tu actividad">
+  {% if perms.portfolio.add_curso %}<a href="{% url 'mis_cursos' %}"><span class="stat-number">{{ total_cursos|stringformat:'02d' }}</span><span><strong>Cursos publicados</strong><small>Tu espacio para enseñar</small></span><i aria-hidden="true">↗</i></a>{% else %}<a href="{% url 'curso_lista' %}"><span class="stat-number" aria-hidden="true">✦</span><span><strong>Explorar cursos</strong><small>Encuentra tu próximo paso</small></span><i aria-hidden="true">↗</i></a>{% endif %}
+  <a href="{% url 'mis_matriculas' %}"><span class="stat-number">{{ matriculas_activas|stringformat:'02d' }}</span><span><strong>Matrículas activas</strong><small>Solicitadas y confirmadas</small></span><i aria-hidden="true">↗</i></a>
+  {% if perms.portfolio.add_curso %}<a href="{% url 'matriculas_recibidas' %}"><span class="stat-number">{{ pendientes_recibidas|stringformat:'02d' }}</span><span><strong>Por revisar</strong><small>Solicitudes a tus cursos</small></span><i aria-hidden="true">↗</i></a>{% else %}<a href="{% url 'perfil_editar' %}"><span class="stat-number" aria-hidden="true">◎</span><span><strong>Tu perfil</strong><small>Haz de este espacio el tuyo</small></span><i aria-hidden="true">↗</i></a>{% endif %}
+</nav>
+<div class="personal-workspace">
+<section class="personal-library" aria-labelledby="library-title">
+  <div class="personal-section-title"><div><p class="personal-kicker">TU RECORRIDO</p><h2 id="library-title">{% if perms.portfolio.add_curso %}Ideas que compartes.{% else %}Mundos por descubrir.{% endif %}</h2></div><a href="{% if perms.portfolio.add_curso %}{% url 'mis_cursos' %}{% else %}{% url 'mis_matriculas' %}{% endif %}">Ver todos ↗</a></div>
+  {% if total_cursos %}<div class="personal-course-list">{% for curso in cursos_personales %}{% with guide=curso|course_guide %}
+  <article class="personal-course"><a class="personal-course-art" href="{% url 'curso_detalle' curso.pk %}" aria-label="Ver {{ curso.nombre }}">{% include 'includes/course_art.html' with motif=guide.motif %}</a><div><p>{{ curso.area|default:'Exploración' }} <span>· {{ curso.get_modalidad_display }}</span></p><h3><a href="{% url 'curso_detalle' curso.pk %}">{{ curso.nombre }}</a></h3><small>{{ curso.fecha_inicio|date:'d M Y' }} · {{ curso.horas }} horas</small></div><a class="personal-edit" href="{% url 'curso_editar' curso.pk %}" aria-label="Editar {{ curso.nombre }}">Editar ↗</a></article>
+  {% endwith %}{% endfor %}</div>
+  {% elif matriculas_recientes %}<div class="personal-course-list">{% for matricula in matriculas_recientes %}<article class="personal-course"><span class="personal-course-art" aria-hidden="true">{% include 'includes/course_art.html' with motif='orbit' %}</span><div><p>{{ matricula.get_estado_display }}</p><h3><a href="{% url 'curso_detalle' matricula.curso.pk %}">{{ matricula.curso.nombre }}</a></h3><small>{{ matricula.curso.fecha_inicio|date:'d M Y' }}</small></div><a class="personal-edit" href="{% url 'curso_detalle' matricula.curso.pk %}" aria-label="Ver {{ matricula.curso.nombre }}">Ver ↗</a></article>{% endfor %}</div>
+  {% else %}<div class="personal-empty"><div aria-hidden="true">{% include 'includes/course_art.html' with motif='orbit' %}</div><h3>Todo empieza con curiosidad.</h3><p>{% if perms.portfolio.add_curso %}Tu conocimiento tiene un lugar aquí. Da forma a tu primer curso.{% else %}Aún no tienes matrículas activas. Encuentra una pregunta que quieras explorar.{% endif %}</p><a class="personal-cta" href="{% url 'curso_lista' %}">Descubrir el catálogo <span aria-hidden="true">↗</span></a></div>{% endif %}
+  {% if perms.portfolio.add_curso %}<a class="personal-create" href="{% url 'curso_crear' %}"><span aria-hidden="true">＋</span> Dar forma a un nuevo curso <span aria-hidden="true">↗</span></a>{% endif %}
+</section>
+<aside class="personal-identity" aria-labelledby="identity-title"><div class="personal-avatar" aria-hidden="true">{{ nombre_personal|first|upper }}<span>✦</span></div><p class="personal-kicker">{% if user.is_staff %}ADMINISTRADOR{% elif perms.portfolio.add_curso %}CREADOR{% else %}PARTICIPANTE{% endif %}</p><h2 id="identity-title">{{ user.get_full_name|default:nombre_personal|capfirst }}</h2><p class="personal-email">{{ user.email|default:user.username }}</p><dl><div><dt>Usuario</dt><dd>{{ user.username }}</dd></div><div><dt>En Oniria desde</dt><dd>{{ user.date_joined|date:'M Y' }}</dd></div><div><dt>Historial de matrículas</dt><dd>{{ total_matriculas }}</dd></div></dl><a href="{% url 'perfil_editar' %}">Editar mi perfil <span aria-hidden="true">↗</span></a><a href="{% url 'cambiar_clave' %}">Cambiar contraseña <span aria-hidden="true">↗</span></a>{% if user.is_staff %}<a href="{% url 'admin:index' %}">Administración <span aria-hidden="true">↗</span></a>{% endif %}<p class="personal-identity-note">Observa. Registra. Imagina.</p></aside>
+</div>
+{% endblock %}

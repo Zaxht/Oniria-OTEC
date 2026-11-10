@@ -1,0 +1,3 @@
+{% extends 'portfolio_base.html' %}
+{% block title %}Sin permiso · Oniria{% endblock %}
+{% block content %}<div class="empty"><p class="eyebrow">403 · SIN PERMISO</p><h1>Tu cuenta no tiene acceso a esta acción.</h1><p>La gestión de cursos requiere permisos de creador y ser dueño del curso.</p><a class="button" href="{% url 'curso_lista' %}">Volver al catálogo</a></div>{% endblock %}

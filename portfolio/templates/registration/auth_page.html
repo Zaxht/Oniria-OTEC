@@ -1,0 +1,3 @@
+{% extends 'portfolio_base.html' %}
+{% block title %}{% if auth_mode == 'register' %}Crear cuenta{% else %}Ingresar{% endif %} · Oniria{% endblock %}
+{% block content %}<section class="auth-standalone">{% include 'registration/auth_fragment.html' %}<p class="auth-switch">{% if auth_mode == 'register' %}¿Ya tienes cuenta? <a href="{% url 'login' %}">Ingresar</a>{% else %}¿Primera vez? <a href="{% url 'registro' %}">Crear cuenta</a>{% endif %}</p></section>{% endblock %}

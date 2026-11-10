@@ -1,0 +1,12 @@
+{% load course_design %}
+<article class="course-card{% if illustrated %} course-card--illustrated{% endif %}">
+  {% if illustrated %}{% with guide=curso|course_guide %}<a class="course-visual" href="{% url 'curso_detalle' curso.pk %}" aria-label="Explorar {{ curso.nombre }}">{% include 'includes/course_art.html' with motif=guide.motif %}<span class="visual-label">{{ guide.label }}</span><span class="visual-arrow" aria-hidden="true">↗</span></a>{% endwith %}{% endif %}
+  <div class="course-index" aria-hidden="true"><span>{{ curso.pk|stringformat:"02d" }}</span><span>✺</span></div>
+  <div class="card-top"><span class="badge">{{ curso.area|default:'Sin área' }}</span><span class="modality">{{ curso.get_modalidad_display }}</span></div>
+  <h3><a href="{% url 'curso_detalle' curso.pk %}">{{ curso.nombre }}</a></h3>
+  <p class="description">{{ curso.descripcion|truncatechars:115 }}</p>
+  <div class="tags">{% for competencia in curso.competencias.all %}<span>{{ competencia.nombre }}</span>{% empty %}<span>Sin competencias asignadas</span>{% endfor %}</div>
+  <div class="course-meta"><span>{{ curso.horas }} horas</span><span>{{ curso.cupos }} cupos</span><span>{{ curso.fecha_inicio|date:'d M Y' }}</span></div>
+  <div class="card-bottom"><span>{{ curso.relator.get_full_name|default:curso.relator.username }}</span><a href="{% url 'curso_detalle' curso.pk %}" aria-label="Ver curso {{ curso.nombre }}">Ver curso ↗</a></div>
+  {% if user == curso.relator %}<div class="owner-actions"><a href="{% url 'curso_editar' curso.pk %}">Editar</a><a href="{% url 'curso_eliminar' curso.pk %}">Eliminar</a></div>{% endif %}
+</article>

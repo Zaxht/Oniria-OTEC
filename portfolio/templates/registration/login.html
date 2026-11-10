@@ -1,0 +1,3 @@
+{% extends 'portfolio_base.html' %}
+{% block title %}Ingresar · Oniria{% endblock %}
+{% block content %}<div class="form-page narrow"><p class="eyebrow">QUÉ BUENO VERTE</p><h1>Sigamos aprendiendo.</h1><p>Ingresa para gestionar tus cursos y matrículas.</p><form method="post" class="panel form-panel">{% csrf_token %}{{ form.non_field_errors }}{% for field in form %}<div class="field">{{ field.label_tag }}{{ field }}{{ field.errors }}</div>{% endfor %}<input type="hidden" name="next" value="{{ next }}"><button class="button full" type="submit">Ingresar →</button><p>¿Aún no tienes cuenta? <a href="{% url 'registro' %}">Regístrate</a></p></form></div>{% endblock %}

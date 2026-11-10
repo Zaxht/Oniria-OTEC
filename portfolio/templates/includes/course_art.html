@@ -1,0 +1,20 @@
+<svg class="dream-symbol dream-symbol--{{ motif }}" viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <circle class="symbol-orbit" cx="120" cy="90" r="72"/>
+  <circle class="symbol-orbit" cx="120" cy="90" r="65"/>
+  <path class="symbol-guide" d="M20 90H220M120 10V170"/>
+  {% if motif == 'eye' %}
+    <path d="M38 90Q120 6 202 90Q120 174 38 90Z"/><circle cx="120" cy="90" r="30"/><circle class="symbol-fill" cx="120" cy="90" r="9"/>
+  {% elif motif == 'stars' %}
+    <path d="M66 112L95 53L154 46L176 108L124 133Z M95 53L124 133L154 46 M66 112L176 108"/>
+    <circle class="symbol-fill" cx="66" cy="112" r="5"/><circle class="symbol-fill" cx="95" cy="53" r="5"/><circle class="symbol-fill" cx="154" cy="46" r="5"/><circle class="symbol-fill" cx="176" cy="108" r="5"/><circle class="symbol-fill" cx="124" cy="133" r="5"/>
+  {% elif motif == 'orbit' %}
+    <ellipse cx="120" cy="90" rx="80" ry="28" transform="rotate(-35 120 90)"/><ellipse cx="120" cy="90" rx="80" ry="28" transform="rotate(35 120 90)"/><circle class="symbol-fill" cx="120" cy="90" r="13"/><circle class="symbol-fill" cx="180" cy="47" r="5"/>
+  {% elif motif == 'phases' %}
+    <circle cx="60" cy="90" r="23"/><path d="M60 67Q30 90 60 113"/><circle cx="120" cy="90" r="23"/><path class="symbol-fill" d="M120 67A23 23 0 0 1 120 113Z"/><circle class="symbol-fill" cx="180" cy="90" r="23"/>
+  {% elif motif == 'journal' %}
+    <path d="M120 58Q85 35 57 53V124Q85 106 120 130Q155 106 183 124V53Q155 35 120 58V130 M72 69Q91 60 106 73 M72 85Q91 76 106 89 M134 73Q149 60 168 69 M134 89Q149 76 168 85"/>
+  {% else %}
+    <path d="M120 135C71 108 92 62 120 35C148 62 169 108 120 135Z M120 135C71 140 47 102 42 70C89 69 116 97 120 135Z M120 135C169 140 193 102 198 70C151 69 124 97 120 135Z M120 135C81 160 48 146 31 119 M120 135C159 160 192 146 209 119"/>
+  {% endif %}
+  <circle class="symbol-fill" cx="120" cy="18" r="3"/>
+</svg>

@@ -1,0 +1,4 @@
+{% extends 'portfolio_base.html' %}
+{% block title %}Mis cursos · Oniria{% endblock %}
+{% block body_class %}workspace-list-page{% endblock %}
+{% block content %}<div class="page-heading"><p class="eyebrow">ESPACIO DEL RELATOR</p><h1>Comparte lo que sabes.</h1><p>Aquí están los cursos que publicaste.</p><div class="actions"><a class="button" href="{% url 'curso_crear' %}">+ Publicar curso</a>{% if perms.portfolio.add_area %}<a href="{% url 'area_crear' %}">Crear área</a>{% endif %}<a href="{% url 'matriculas_recibidas' %}">Ver matrículas recibidas →</a></div></div><div class="course-grid">{% for curso in cursos %}{% include 'includes/curso_card.html' with illustrated=True %}{% empty %}<div class="empty"><h2>Tu conocimiento tiene un lugar aquí</h2><p>Publica tu primer curso y conecta con nuevos participantes.</p></div>{% endfor %}</div>{% endblock %}
