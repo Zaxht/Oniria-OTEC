@@ -1,0 +1,6 @@
+{% extends "admin/index.html" %}
+{% block content_title %}{% endblock %}
+{% block content %}
+<section class="admin-welcome"><div><p class="admin-eyebrow">ONIRIA / CENTRO DE GESTIÓN</p><h1>Cuida lo que<br><em>hace soñar.</em></h1><p>Cursos, personas y encuentros.<br>Todo lo que da vida a nuestra escuela.</p><a href="{% url 'cuenta' %}">Volver a mi espacio <span aria-hidden="true">↗</span></a></div><div class="admin-seal" aria-hidden="true"><span>✺</span><small>OBSERVAR · CREAR · COMPARTIR</small></div></section>
+{{ block.super }}
+{% endblock %}
