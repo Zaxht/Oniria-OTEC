@@ -90,7 +90,7 @@ Existe también `miempresa.settings_demo`, que usa un archivo SQLite para una vi
 | `portfolio/tests.py` | Casos normales, límites y permisos |
 | `docs/EV3.md` | Matriz de requisitos, decisiones y guía de defensa |
 | `docs/AVANCE.md` | Avance de implementación y registro para sesiones futuras |
-| [docs/USO_IA.docx](docs/USO_IA.docx) | Ejemplos simples de problemas resueltos con ayuda de IA |
+| [docs/USO_IA.docx](docs/USO_IA.docx) | Tres ejemplos simulados de consultas específicas a la IA y su validación |
 
 ## Decisiones del negocio
 
